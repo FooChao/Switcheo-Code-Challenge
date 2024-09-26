@@ -139,3 +139,10 @@ body {
 .value-button-active {
   background-color: #00b451 !important;
 }
+
+#limit .row-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}

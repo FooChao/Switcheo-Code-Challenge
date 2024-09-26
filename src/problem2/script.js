@@ -428,7 +428,7 @@ function updateBuyAmount() {
     const output = document.getElementById('buy-amount');
     const currencyinput = document.getElementById('currency4').value;
     const currencyoutput = document.getElementById('currency5').value;
-    conversion(input,currencyinput,output,currencyoutput); // found at swap section
+    conversionLimit(input,output,false); 
     //updateCurrentOwnedAtSwap2()
 }
 
@@ -437,7 +437,7 @@ function updateSellAmount() {
     const output = document.getElementById('buy-amount').value;
     const currencyinput = document.getElementById('currency4').value;
     const currencyoutput = document.getElementById('currency5').value;
-    conversion(output,currencyoutput,input,currencyinput,); // found at swap section
+    conversionLimit(input,output,true); 
     //updateCurrentOwnedAtSwap()
 }
 
@@ -467,4 +467,89 @@ function tryToLimit() {
         document.getElementById('buy-amount').value = 0;
         alert("Limit set successfully. Trade will be made in future when conditions are met! Expect up to 1 hour delay.");
     }
+}
+
+function updateCurrencyExchange(ratioAdded, event) {
+    if (event) event.preventDefault(); // Prevent form submission
+    const inputCurrency = document.getElementById('currency4').value;
+    const outputCurrency = document.getElementById('currency5').value;
+    document.getElementById('exchange-amount').value = conversionNoChangeOutput(1,inputCurrency,outputCurrency) * (1 + ratioAdded);
+    updateRateButton();
+    updateBuyAmount();
+}
+
+function updateMarketCurrencyExchange(event) {
+    if (event) event.preventDefault(); // Prevent form submission
+    updateCurrencyExchange(0,event);
+}
+
+updateMarketCurrencyExchange();
+
+function conversionNoChangeOutput(input, inputCurrency, outputCurrency) {
+    // Find the input currency rate
+    const inputRate = currencyData.find(item => item.currency === inputCurrency)?.price;
+    // Find the output currency rate
+    const outputRate = currencyData.find(item => item.currency === outputCurrency)?.price;
+
+    // Ensure both rates are found
+    if (inputRate === undefined || outputRate === undefined) {
+        console.error('Currency not found');
+        return null;
+    }
+
+    // Calculate the converted amount
+    const convertedAmount = (input / inputRate) * outputRate;
+    
+    return convertedAmount;
+}
+
+// since many portion of this code is repeated from conversion ideally I should extract those repeated lines out but I have many upcoming exams and do not have the time
+function conversionLimit(input, output, isflipped) { 
+    let convertedAmount;
+    if (!isflipped){
+        convertedAmount = document.getElementById('exchange-amount').value * input;
+    } else {
+        convertedAmount = input / document.getElementById('exchange-amount').value ;
+    }
+    
+    // Assign the converted amount to the output
+    output.value = convertedAmount;
+    return convertedAmount;
+}
+
+function updateRateButton() {
+    const inputCurrency = document.getElementById('currency4').value;
+    const outputCurrency = document.getElementById('currency5').value;
+    const marketRate = conversionNoChangeOutput(1,inputCurrency,outputCurrency);
+    const amount = document.getElementById('exchange-amount').value;
+    console.log(amount);
+    console.log(marketRate);
+    const percent = Math.round((amount - marketRate)/marketRate * 100);
+
+    document.getElementById('market').classList.remove('value-button-active');
+    document.getElementById('add1').classList.remove('value-button-active');
+    document.getElementById('add5').classList.remove('value-button-active');
+    document.getElementById('add10').classList.remove('value-button-active');
+    console.log(percent);
+    switch (percent) {
+        case 1:
+            document.getElementById('add1').classList.add('value-button-active');
+            break;            
+        case 5:
+            document.getElementById('add5').classList.add('value-button-active');
+            break; 
+        case 10:
+            document.getElementById('add10').classList.add('value-button-active');
+            break;
+        case 0:
+            document.getElementById('market').classList.add('value-button-active');
+            document.getElementById('market').textContent = "Market";
+            break;
+        default:
+            //do nothing
+            document.getElementById('market').classList.add('value-button-active');
+            document.getElementById('market').textContent = percent + "% X";
+    }  
+
+
 }

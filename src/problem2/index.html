@@ -245,6 +245,32 @@
     <div id="limit" class = "hidden">
       <div class = "partition">
         <div>
+          <label for="exchange-amount" class = "exchange-currency">When 1 USD is worth</label>
+        </div>
+        <div class = "row-container">          
+          <div>
+            <input id="exchange-amount" onkeyup="updateRateButton()" value="0"/>                      
+          </div>
+          <h1 id = "currency6"> BLUR</h1>  
+        </div>
+        <div class = "row-container">
+          <button id = "market" class="value-button" onclick="updateMarketCurrencyExchange(event)">
+            Market
+          </button>
+          <button id = "add1" class="value-button" onclick="updateCurrencyExchange(0.01,event)">
+            +1%
+          </button>
+          <button id = "add5" class="value-button" onclick="updateCurrencyExchange(0.05,event)">
+            +5%
+          </button>
+          <button id = "add10" class="value-button" onclick="updateCurrencyExchange(0.1,event)">
+            +10%
+          </button>
+        </div>
+        
+      </div>
+      <div class = "partition">
+        <div>
           <label for="sell-amount">Sell:</label>
         </div>
         <div>
@@ -288,6 +314,7 @@
           <h2 id = "limitOwnedSend">Currently owned:</h2>
         </div>
       </div>
+
       <div class = "partition">
         <div>
           <label for="buy-amount">Buy:</label>      
