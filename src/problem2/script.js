@@ -135,9 +135,11 @@ function change(number, event) {
     document.getElementById("swapButton").classList.remove("active");
     document.getElementById("sendButton").classList.remove("active");
     document.getElementById("buyButton").classList.remove("active");
+    document.getElementById("limitButton").classList.remove("active");
     document.getElementById("swap").classList.add("hidden");
     document.getElementById("send").classList.add("hidden");
     document.getElementById("buy").classList.add("hidden");
+    document.getElementById("limit").classList.add("hidden");
     switch (number) {
         case 1 : 
             document.getElementById("swapButton").classList.add("active");
@@ -151,6 +153,9 @@ function change(number, event) {
             document.getElementById("buyButton").classList.add("active");
             document.getElementById("buy").classList.remove("hidden");
             break;
+        case 4 :
+            document.getElementById("limitButton").classList.add("active");
+            document.getElementById("limit").classList.remove("hidden");
         default:
             //fall through
     }
