@@ -407,3 +407,64 @@ function updateValueActive(amount) {
             //do nothing
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Limit functions
+function updateBuyAmount() {
+    const input = document.getElementById('sell-amount').value;
+    const output = document.getElementById('buy-amount');
+    const currencyinput = document.getElementById('currency4').value;
+    const currencyoutput = document.getElementById('currency5').value;
+    conversion(input,currencyinput,output,currencyoutput); // found at swap section
+    //updateCurrentOwnedAtSwap2()
+}
+
+function updateSellAmount() {
+    const input = document.getElementById('sell-amount');
+    const output = document.getElementById('buy-amount').value;
+    const currencyinput = document.getElementById('currency4').value;
+    const currencyoutput = document.getElementById('currency5').value;
+    conversion(output,currencyoutput,input,currencyinput,); // found at swap section
+    //updateCurrentOwnedAtSwap()
+}
+
+
+function confirmAndLimit(event) {
+
+    if (event) event.preventDefault(); // Prevent form submission
+    
+    const userConfirmed = confirm("Are you sure you want to proceed with the limit?");
+    if (userConfirmed) {
+        tryToLimit();
+    } else {
+        alert("You have cancelled the limit!")
+    }
+}
+
+function tryToLimit() {
+    const input = parseFloat(document.getElementById('sell-amount').value);
+    const output = parseFloat(document.getElementById('buy-amount').value);
+    const inputCurrency = document.getElementById('currency4').value;
+    const outputCurrency = document.getElementById('currency5').value;
+
+    if (isNaN(input) || isNaN(output) || input <= 0) {
+        alert("Please enter a valid number!")
+    } else {
+        document.getElementById('sell-amount').value = 0;
+        document.getElementById('buy-amount').value = 0;
+        alert("Limit set successfully. Trade will be made in future when conditions are met! Expect up to 1 hour delay.");
+    }
+}

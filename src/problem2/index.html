@@ -239,8 +239,101 @@
           </div>
         </div>
         <button class = "submit" onclick="confirmAndBuy(event)">BUY</button>
+      </div>  
+    </div>
+
+    <div id="limit" class = "hidden">
+      <div class = "partition">
+        <div>
+          <label for="sell-amount">Sell:</label>
+        </div>
+        <div>
+          <input id="sell-amount" onkeyup="updateBuyAmount()" value="0"/>
+          <select name="currency4" id="currency4" onchange="updateBuyAmount()" value="USD">
+            <option value="USD">USD</option>
+            <option value="BLUR">BLUR</option>
+            <option value="bNEO">bNEO</option>
+            <option value="BUSD">BUSD</option>
+            <option value="ETH">ETH</option>
+            <option value="GMX">GMX</option>
+            <option value="STEVMOS">STEVMOS</option>
+            <option value="LUNA">LUNA</option>
+            <option value="RATOM">RATOM</option>
+            <option value="STRD">STRD</option>
+            <option value="EVMOS">EVMOS</option>
+            <option value="IBCX">IBCX</option>
+            <option value="IRIS">IRIS</option>
+            <option value="ampLUNA">ampLUNA</option>
+            <option value="KUJI">KUJI</option>
+            <option value="STOSMO">STOSMO</option>
+            <option value="USDC">USDC</option>
+            <option value="axlUSDC">axlUSDC</option>
+            <option value="ATOM">ATOM</option>
+            <option value="STATOM">STATOM</option>
+            <option value="OSMO">OSMO</option>
+            <option value="rSWTH">rSWTH</option>
+            <option value="STLUNA">STLUNA</option>
+            <option value="LSI">LSI</option>
+            <option value="OKB">OKB</option>
+            <option value="OKT">OKT</option>
+            <option value="SWTH">SWTH</option>
+            <option value="USC">USC</option>
+            <option value="WBTC">WBTC</option>
+            <option value="wstETH">wstETH</option>
+            <option value="YieldUSD">YieldUSD</option>
+            <option value="ZIL">ZIL</option>
+          </select>
+        </div>
+        <div>
+          <h2 id = "limitOwnedSend">Currently owned:</h2>
+        </div>
       </div>
-      
+      <div class = "partition">
+        <div>
+          <label for="buy-amount">Buy:</label>      
+        </div>
+        <div>
+          <input id="buy-amount" onkeyup="updateSellAmount()" value = "0"/>
+          <select name="currency5" id="currency5" onchange="updateSellAmount()">
+            <option value="BLUR">BLUR</option>
+            <option value="bNEO">bNEO</option>
+            <option value="BUSD">BUSD</option>
+            <option value="USD">USD</option>
+            <option value="ETH">ETH</option>
+            <option value="GMX">GMX</option>
+            <option value="STEVMOS">STEVMOS</option>
+            <option value="LUNA">LUNA</option>
+            <option value="RATOM">RATOM</option>
+            <option value="STRD">STRD</option>
+            <option value="EVMOS">EVMOS</option>
+            <option value="IBCX">IBCX</option>
+            <option value="IRIS">IRIS</option>
+            <option value="ampLUNA">ampLUNA</option>
+            <option value="KUJI">KUJI</option>
+            <option value="STOSMO">STOSMO</option>
+            <option value="USDC">USDC</option>
+            <option value="axlUSDC">axlUSDC</option>
+            <option value="ATOM">ATOM</option>
+            <option value="STATOM">STATOM</option>
+            <option value="OSMO">OSMO</option>
+            <option value="rSWTH">rSWTH</option>
+            <option value="STLUNA">STLUNA</option>
+            <option value="LSI">LSI</option>
+            <option value="OKB">OKB</option>
+            <option value="OKT">OKT</option>
+            <option value="SWTH">SWTH</option>
+            <option value="USC">USC</option>
+            <option value="WBTC">WBTC</option>
+            <option value="wstETH">wstETH</option>
+            <option value="YieldUSD">YieldUSD</option>
+            <option value="ZIL">ZIL</option>
+          </select> 
+        </div>
+        <div>
+          <h2 id ="limitOwnedrecieve">Currently owned:</h2>
+        </div>
+        <button class = "submit" onclick="confirmAndLimit(event)">Set Limit</button>
+      </div>
     </div>
   </form>
   <script src="/src/problem2/script.js"></script>
