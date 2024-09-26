@@ -11,13 +11,10 @@
 
   <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
   
-  <form onsubmit="return !1" class = "styled-form">
+  <form class = "styled-form">
     <div id = "form_nav">
       <button>
         Swap
-      </button>
-      <button>
-        Limit
       </button>
       <button>
         Send
@@ -33,7 +30,44 @@
           <label for="input-amount">Amount to send:</label>
         </div>
         <div>
-          <input id="input-amount" />
+          <input id="input-amount" onkeyup="updateOutput()" value="0"/>
+          <select name="currency" id="currency" onchange="updateOutput()" value="USD">
+            <option value="USD">USD</option>
+            <option value="BLUR">BLUR</option>
+            <option value="bNEO">bNEO</option>
+            <option value="BUSD">BUSD</option>
+            <option value="ETH">ETH</option>
+            <option value="GMX">GMX</option>
+            <option value="STEVMOS">STEVMOS</option>
+            <option value="LUNA">LUNA</option>
+            <option value="RATOM">RATOM</option>
+            <option value="STRD">STRD</option>
+            <option value="EVMOS">EVMOS</option>
+            <option value="IBCX">IBCX</option>
+            <option value="IRIS">IRIS</option>
+            <option value="ampLUNA">ampLUNA</option>
+            <option value="KUJI">KUJI</option>
+            <option value="STOSMO">STOSMO</option>
+            <option value="USDC">USDC</option>
+            <option value="axlUSDC">axlUSDC</option>
+            <option value="ATOM">ATOM</option>
+            <option value="STATOM">STATOM</option>
+            <option value="OSMO">OSMO</option>
+            <option value="rSWTH">rSWTH</option>
+            <option value="STLUNA">STLUNA</option>
+            <option value="LSI">LSI</option>
+            <option value="OKB">OKB</option>
+            <option value="OKT">OKT</option>
+            <option value="SWTH">SWTH</option>
+            <option value="USC">USC</option>
+            <option value="WBTC">WBTC</option>
+            <option value="wstETH">wstETH</option>
+            <option value="YieldUSD">YieldUSD</option>
+            <option value="ZIL">ZIL</option>
+          </select>
+        </div>
+        <div>
+          <h2 id = "swapOwnedSend">Currently owned:</h2>
         </div>
       </div>
       <div class = "partition">
@@ -41,13 +75,50 @@
           <label for="output-amount">Amount to receive:</label>      
         </div>
         <div>
-          <input id="output-amount" />
+          <input id="output-amount" onkeyup="updateInput()" value = "0"/>
+          <select name="currency2" id="currency2" onchange="updateInput()">
+            <option value="BLUR">BLUR</option>
+            <option value="bNEO">bNEO</option>
+            <option value="BUSD">BUSD</option>
+            <option value="USD">USD</option>
+            <option value="ETH">ETH</option>
+            <option value="GMX">GMX</option>
+            <option value="STEVMOS">STEVMOS</option>
+            <option value="LUNA">LUNA</option>
+            <option value="RATOM">RATOM</option>
+            <option value="STRD">STRD</option>
+            <option value="EVMOS">EVMOS</option>
+            <option value="IBCX">IBCX</option>
+            <option value="IRIS">IRIS</option>
+            <option value="ampLUNA">ampLUNA</option>
+            <option value="KUJI">KUJI</option>
+            <option value="STOSMO">STOSMO</option>
+            <option value="USDC">USDC</option>
+            <option value="axlUSDC">axlUSDC</option>
+            <option value="ATOM">ATOM</option>
+            <option value="STATOM">STATOM</option>
+            <option value="OSMO">OSMO</option>
+            <option value="rSWTH">rSWTH</option>
+            <option value="STLUNA">STLUNA</option>
+            <option value="LSI">LSI</option>
+            <option value="OKB">OKB</option>
+            <option value="OKT">OKT</option>
+            <option value="SWTH">SWTH</option>
+            <option value="USC">USC</option>
+            <option value="WBTC">WBTC</option>
+            <option value="wstETH">wstETH</option>
+            <option value="YieldUSD">YieldUSD</option>
+            <option value="ZIL">ZIL</option>
+          </select> 
         </div>
-        <button class = "submit">CONFIRM SWAP</button>
+        <div>
+          <h2 id ="swapOwnedrecieve">Currently owned:</h2>
+        </div>
+        <button class = "submit" onclick="confirmAndTrade()">CONFIRM SWAP</button>
       </div>
-    </div>    
+    </div>
   </form>
-  <script src="script.js"></script>
+  <script src="/src/problem2/script.js"></script>
 </body>
 
 </html>
