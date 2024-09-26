@@ -1,4 +1,4 @@
-
+//initialisation
 let currencyData = [
     {"currency": "BLUR", "date": "2023-08-29T07:10:40.000Z", "price": 0.20811525423728813},
     {"currency": "bNEO", "date": "2023-08-29T07:10:50.000Z", "price": 7.1282679},
@@ -85,7 +85,7 @@ function updateStorage () {
     localStorage.setItem('currentOwned', JSON.stringify(currentOwned));
 }
 
-function updateCurrentOwned() {
+function updateCurrentOwnedAtSwap() {
     const inputCurrency = document.getElementById('currency').value;
     const outputCurrency = document.getElementById('currency2').value;
     document.getElementById("swapOwnedSend").textContent = "Currently Owned:" 
@@ -94,8 +94,39 @@ function updateCurrentOwned() {
         + currentOwned.find(item => item.currency === outputCurrency).amount;
 }
 
+function updateCurrentOwnedAtSend() {
+    const inputCurrency = document.getElementById('currency3').value;
+    document.getElementById("sendOwnedSend").textContent = "Currently Owned:" 
+    + currentOwned.find(item => item.currency === inputCurrency).amount ;
+}
+
+function updateCurrentOwnedAtBuy() {
+    document.getElementById('usd-balance').textContent = "USD to spend (balance: "
+    + currentOwned.find(item => item.currency === 'USD').amount + ")";
+}
+
+updateCurrentOwnedAtSwap();
+updateCurrentOwnedAtSend();
+updateCurrentOwnedAtBuy();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Navigation functions
 function change(number, event) {
 
     if (event) event.preventDefault(); // Prevent form submission
@@ -125,14 +156,29 @@ function change(number, event) {
     }
 }
 
-updateCurrentOwned();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Swap functions
 function updateOutput() {
     const input = document.getElementById('input-amount').value;
     const output = document.getElementById('output-amount');
     const currencyinput = document.getElementById('currency').value;
     const currencyoutput = document.getElementById('currency2').value;
     conversion(input,currencyinput,output,currencyoutput);
+    updateCurrentOwnedAtSwap()
 }
 
 function updateInput() {
@@ -141,6 +187,7 @@ function updateInput() {
     const currencyinput = document.getElementById('currency').value;
     const currencyoutput = document.getElementById('currency2').value;
     conversion(output,currencyoutput,input,currencyinput,);
+    updateCurrentOwnedAtSwap()
 }
 
 // this portion of code is by chatgpt
@@ -193,10 +240,13 @@ function tryToTrade() {
         //can trade
         currentOwned.find(item => item.currency === inputCurrency).amount -= input;
         currentOwned.find(item => item.currency === outputCurrency).amount += output;
-        updateCurrentOwned();
+        updateCurrentOwnedAtSwap();
+        updateCurrentOwnedAtSend();
+        updateCurrentOwnedAtBuy();
         updateStorage();
         document.getElementById('input-amount').value = 0;
         document.getElementById('output-amount').value = 0;
+        alert("Swap success!");
     }
 }
 
@@ -204,3 +254,151 @@ function tryToTrade() {
 
 
 
+
+
+
+
+
+
+
+//Send functions
+function confirmAndSend (event) {
+    if (event) event.preventDefault(); // Prevent form submission
+
+    const input = parseFloat(document.getElementById('input-amount-to-send').value);
+    const inputCurrency = document.getElementById('currency3').value;
+    const inputAmount = currentOwned.find(item => item.currency === inputCurrency)?.amount;
+    if (inputAmount === undefined) {
+        alert("Currency used not available at the moment!");
+    } else if (isNaN(input) || input <= 0) {
+        alert("Please enter a valid number!")
+    } else if (input > inputAmount) {
+        alert("You do not have enough curency to send!");
+    } else if (document.getElementById('person-to-send').value === "") {
+        alert("Please enter who you want to send to!")
+    } else {
+        //can send
+        currentOwned.find(item => item.currency === inputCurrency).amount -= input;
+        updateCurrentOwnedAtSwap();
+        updateCurrentOwnedAtSend();
+        updateCurrentOwnedAtBuy();
+        updateStorage();
+        document.getElementById('input-amount-to-send').value = 0;
+
+        alert("Money sent to " + document.getElementById("person-to-send").value);
+        document.getElementById("person-to-send").value = "";
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//buy functions
+function updateAmountRecieved() {
+    const input = document.getElementById('usd-to-spend').value;
+    const output = document.getElementById('amount-recieved');
+    const currencyinput = "USD"
+    const currencyoutput = document.getElementById('amount-recieved-type').value;
+    conversionBuy(input,currencyinput,output,currencyoutput);
+    updateCurrentOwnedAtSwap();
+    updateValueActive(input);
+}
+
+// this portion of code is by chatgpt
+// since many portion of this code is repeated from conversion ideally I should extract those repeated lines out but I have many upcoming exams and do not have the time
+function conversionBuy(input, inputCurrency, output, outputCurrency) { 
+    // Find the input currency rate
+    const inputRate = currencyData.find(item => item.currency === inputCurrency)?.price;
+    // Find the output currency rate
+    const outputRate = currencyData.find(item => item.currency === outputCurrency)?.price;
+
+    // Ensure both rates are found
+    if (inputRate === undefined || outputRate === undefined) {
+        console.error('Currency not found');
+        return null;
+    }
+
+    // Calculate the converted amount
+    const convertedAmount = (input / inputRate) * outputRate;
+    
+    // Assign the converted amount to the output
+    output.textContent = "Amount recieved: " + convertedAmount;
+    return convertedAmount;
+}
+
+function confirmAndBuy(event) {
+
+    if (event) event.preventDefault(); // Prevent form submission
+    
+    const userConfirmed = confirm("Are you sure you want to proceed with buying?");
+    if (userConfirmed) {
+        tryToBuy();
+    } else {
+        alert("You have cancelled the buy!")
+    }
+}
+
+function tryToBuy() {
+    const input = parseFloat(document.getElementById('usd-to-spend').value);
+    const output = parseFloat(document.getElementById('amount-recieved').textContent.split(': ')[1]);
+    const inputCurrency = "USD";
+    const outputCurrency = document.getElementById('amount-recieved-type').value;
+    const inputAmount = currentOwned.find(item => item.currency === inputCurrency)?.amount;
+    const outputAmount = currentOwned.find(item => item.currency === outputCurrency)?.amount;
+    if (inputAmount === undefined || outputAmount === undefined ) {
+        alert("Currency used not available at the moment!");
+    } else if (isNaN(input) || isNaN(output)) {
+        alert("Please enter a valid number!")
+    } else if (input > inputAmount) {
+        alert("You do not have enough curency to trade!");
+    } else {
+        //can trade
+        currentOwned.find(item => item.currency === inputCurrency).amount -= input;
+        currentOwned.find(item => item.currency === outputCurrency).amount += output;
+        updateCurrentOwnedAtSwap();
+        updateCurrentOwnedAtSend();
+        updateCurrentOwnedAtBuy()
+        updateStorage();
+        document.getElementById('usd-to-spend').value = 0;
+        document.getElementById('amount-recieved').textContent = "Amount recieved: " + 0;
+        alert("Buy success!");
+    }
+
+    
+}
+
+function changeUSD(amount, event) {
+    if (event) event.preventDefault(); // Prevent form submission
+    document.getElementById('usd-to-spend').value = amount;
+    updateAmountRecieved();
+}
+
+function updateValueActive(amount) {
+    document.getElementById('buy100').classList.remove('value-button-active');
+    document.getElementById('buy300').classList.remove('value-button-active');
+    document.getElementById('buy1000').classList.remove('value-button-active');
+    switch (amount) {
+        case '100':
+            document.getElementById('buy100').classList.add('value-button-active');
+            break;            
+        case '300':
+            document.getElementById('buy300').classList.add('value-button-active');
+            break; 
+        case '1000':
+            document.getElementById('buy1000').classList.add('value-button-active');
+            break;
+        default:
+            //do nothing
+    }
+}

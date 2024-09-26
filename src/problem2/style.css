@@ -100,3 +100,42 @@ body {
   background-color: #00b451;
   border-radius: 50px;
 }
+
+#person-to-send {
+  margin-bottom: 20px;
+}
+
+#usd-to-spend {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+#amount-recieved-type {
+  background: none;
+  border-color: #333;
+  font-size: medium;
+  margin-left: 20px;
+}
+
+#buy .row-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.row-container .value-button {
+  background-color: greenyellow;
+  border-radius: 50px;
+  margin-left: 10px;
+}
+
+.row-container .value-button:hover {
+  color: red;
+  border-radius: 50px;
+}
+
+.value-button-active {
+  background-color: #00b451 !important;
+}

@@ -114,18 +114,18 @@
         <div>
           <h2 id ="swapOwnedrecieve">Currently owned:</h2>
         </div>
-        <button class = "submit" onclick="confirmAndTrade(event)">CONFIRM SWAP</button>
+        <button class = "submit" onclick="confirmAndTrade(event)">SWAP</button>
       </div>
     </div>
 
     <div id="send" class = "hidden">
       <div class = "partition">
         <div>
-          <label for="input-amount">Amount to send:</label>
+          <label for="input-amount-to-send">You are sending</label>
         </div>
         <div>
-          <input id="input-amount-to-send" onkeyup="updateOutput()" value="0"/>
-          <select name="currency" id="currency" onchange="updateOutput()" value="USD">
+          <input id="input-amount-to-send" value="0"/>
+          <select name="currency3" id="currency3" onchange="updateCurrentOwnedAtSend()">
             <option value="USD">USD</option>
             <option value="BLUR">BLUR</option>
             <option value="bNEO">bNEO</option>
@@ -161,149 +161,83 @@
           </select>
         </div>
         <div>
-          <h2 id = "swapOwnedSend">Currently owned:</h2>
+          <h2 id = "sendOwnedSend">Currently owned:</h2>
         </div>
       </div>
       <div class = "partition">
         <div>
-          <label for="output-amount">Amount to receive:</label>      
+          <label for="person-to-send">To:</label>      
         </div>
         <div>
-          <input id="output-amount" onkeyup="updateInput()" value = "0"/>
-          <select name="currency2" id="currency2" onchange="updateInput()">
-            <option value="BLUR">BLUR</option>
-            <option value="bNEO">bNEO</option>
-            <option value="BUSD">BUSD</option>
-            <option value="USD">USD</option>
-            <option value="ETH">ETH</option>
-            <option value="GMX">GMX</option>
-            <option value="STEVMOS">STEVMOS</option>
-            <option value="LUNA">LUNA</option>
-            <option value="RATOM">RATOM</option>
-            <option value="STRD">STRD</option>
-            <option value="EVMOS">EVMOS</option>
-            <option value="IBCX">IBCX</option>
-            <option value="IRIS">IRIS</option>
-            <option value="ampLUNA">ampLUNA</option>
-            <option value="KUJI">KUJI</option>
-            <option value="STOSMO">STOSMO</option>
-            <option value="USDC">USDC</option>
-            <option value="axlUSDC">axlUSDC</option>
-            <option value="ATOM">ATOM</option>
-            <option value="STATOM">STATOM</option>
-            <option value="OSMO">OSMO</option>
-            <option value="rSWTH">rSWTH</option>
-            <option value="STLUNA">STLUNA</option>
-            <option value="LSI">LSI</option>
-            <option value="OKB">OKB</option>
-            <option value="OKT">OKT</option>
-            <option value="SWTH">SWTH</option>
-            <option value="USC">USC</option>
-            <option value="WBTC">WBTC</option>
-            <option value="wstETH">wstETH</option>
-            <option value="YieldUSD">YieldUSD</option>
-            <option value="ZIL">ZIL</option>
-          </select> 
+          <input id="person-to-send"  placeholder="Wallet address/ENS name" />          
         </div>
-        <div>
-          <h2 id ="swapOwnedrecieve">Currently owned:</h2>
-        </div>
-        <button class = "submit" onclick="confirmAndTrade(event)">CONFIRM SEND</button>
+        <button class = "submit" onclick="confirmAndSend(event)">SEND</button>
       </div>
     </div>
 
     <div id="buy" class = "hidden">
       <div class = "partition">
         <div>
-          <label for="input-amount">Amount to send:</label>
+          <label for="usd-to-spend" id="usd-balance">USD to spend</label>
         </div>
         <div>
-          <input id="input-amount-to-send" onkeyup="updateOutput()" value="0"/>
-          <select name="currency" id="currency" onchange="updateOutput()" value="USD">
-            <option value="USD">USD</option>
-            <option value="BLUR">BLUR</option>
-            <option value="bNEO">bNEO</option>
-            <option value="BUSD">BUSD</option>
-            <option value="ETH">ETH</option>
-            <option value="GMX">GMX</option>
-            <option value="STEVMOS">STEVMOS</option>
-            <option value="LUNA">LUNA</option>
-            <option value="RATOM">RATOM</option>
-            <option value="STRD">STRD</option>
-            <option value="EVMOS">EVMOS</option>
-            <option value="IBCX">IBCX</option>
-            <option value="IRIS">IRIS</option>
-            <option value="ampLUNA">ampLUNA</option>
-            <option value="KUJI">KUJI</option>
-            <option value="STOSMO">STOSMO</option>
-            <option value="USDC">USDC</option>
-            <option value="axlUSDC">axlUSDC</option>
-            <option value="ATOM">ATOM</option>
-            <option value="STATOM">STATOM</option>
-            <option value="OSMO">OSMO</option>
-            <option value="rSWTH">rSWTH</option>
-            <option value="STLUNA">STLUNA</option>
-            <option value="LSI">LSI</option>
-            <option value="OKB">OKB</option>
-            <option value="OKT">OKT</option>
-            <option value="SWTH">SWTH</option>
-            <option value="USC">USC</option>
-            <option value="WBTC">WBTC</option>
-            <option value="wstETH">wstETH</option>
-            <option value="YieldUSD">YieldUSD</option>
-            <option value="ZIL">ZIL</option>
-          </select>
+          <input id="usd-to-spend" onkeyup="updateAmountRecieved()" value="0"/>
         </div>
         <div>
-          <h2 id = "swapOwnedSend">Currently owned:</h2>
+          
         </div>
+        <div class="row-container">
+          <button id = "buy100" class="value-button" onclick="changeUSD(100, event)">
+            100
+          </button>
+          <button id = "buy300" class="value-button" onclick="changeUSD(300, event)">
+            300
+          </button>
+          <button id = "buy1000" class="value-button" onclick="changeUSD(1000, event)">
+            1000
+          </button>
+        </div>
+        <div>
+          <div class="row-container" >
+            <h2 id = "amount-recieved">AmountRecieved: 0</h2> 
+            <select name="amount-recieved-type" id="amount-recieved-type" onchange="updateAmountRecieved()">
+              <option value="BLUR">BLUR</option>
+              <option value="bNEO">bNEO</option>
+              <option value="BUSD">BUSD</option>
+              <option value="ETH">ETH</option>
+              <option value="GMX">GMX</option>
+              <option value="STEVMOS">STEVMOS</option>
+              <option value="LUNA">LUNA</option>
+              <option value="RATOM">RATOM</option>
+              <option value="STRD">STRD</option>
+              <option value="EVMOS">EVMOS</option>
+              <option value="IBCX">IBCX</option>
+              <option value="IRIS">IRIS</option>
+              <option value="ampLUNA">ampLUNA</option>
+              <option value="KUJI">KUJI</option>
+              <option value="STOSMO">STOSMO</option>
+              <option value="USDC">USDC</option>
+              <option value="axlUSDC">axlUSDC</option>
+              <option value="ATOM">ATOM</option>
+              <option value="STATOM">STATOM</option>
+              <option value="OSMO">OSMO</option>
+              <option value="rSWTH">rSWTH</option>
+              <option value="STLUNA">STLUNA</option>
+              <option value="LSI">LSI</option>
+              <option value="OKB">OKB</option>
+              <option value="OKT">OKT</option>
+              <option value="SWTH">SWTH</option>
+              <option value="USC">USC</option>
+              <option value="WBTC">WBTC</option>
+              <option value="wstETH">wstETH</option>
+              <option value="YieldUSD">YieldUSD</option>
+              <option value="ZIL">ZIL</option>
+            </select>
+          </div>
+        </div>
+        <button class = "submit" onclick="confirmAndBuy(event)">BUY</button>
       </div>
-      <div class = "partition">
-        <div>
-          <label for="output-amount">Amount to receive:</label>      
-        </div>
-        <div>
-          <input id="output-amount" onkeyup="updateInput()" value = "0"/>
-          <select name="currency2" id="currency2" onchange="updateInput()">
-            <option value="BLUR">BLUR</option>
-            <option value="bNEO">bNEO</option>
-            <option value="BUSD">BUSD</option>
-            <option value="USD">USD</option>
-            <option value="ETH">ETH</option>
-            <option value="GMX">GMX</option>
-            <option value="STEVMOS">STEVMOS</option>
-            <option value="LUNA">LUNA</option>
-            <option value="RATOM">RATOM</option>
-            <option value="STRD">STRD</option>
-            <option value="EVMOS">EVMOS</option>
-            <option value="IBCX">IBCX</option>
-            <option value="IRIS">IRIS</option>
-            <option value="ampLUNA">ampLUNA</option>
-            <option value="KUJI">KUJI</option>
-            <option value="STOSMO">STOSMO</option>
-            <option value="USDC">USDC</option>
-            <option value="axlUSDC">axlUSDC</option>
-            <option value="ATOM">ATOM</option>
-            <option value="STATOM">STATOM</option>
-            <option value="OSMO">OSMO</option>
-            <option value="rSWTH">rSWTH</option>
-            <option value="STLUNA">STLUNA</option>
-            <option value="LSI">LSI</option>
-            <option value="OKB">OKB</option>
-            <option value="OKT">OKT</option>
-            <option value="SWTH">SWTH</option>
-            <option value="USC">USC</option>
-            <option value="WBTC">WBTC</option>
-            <option value="wstETH">wstETH</option>
-            <option value="YieldUSD">YieldUSD</option>
-            <option value="ZIL">ZIL</option>
-          </select> 
-        </div>
-        <div>
-          <h2 id ="swapOwnedrecieve">Currently owned:</h2>
-        </div>
-        <button class = "submit" onclick="confirmAndTrade(event)">CONFIRM BUY</button>
-      </div>
+      
     </div>
   </form>
   <script src="/src/problem2/script.js"></script>
