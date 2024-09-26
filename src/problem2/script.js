@@ -582,3 +582,12 @@ function handleChangeInBuyCurrency() {
     document.getElementById("currency6").textContent = document.getElementById("currency5").value;
     
 }
+
+function changeExpiry(type, event) {
+    if (event) event.preventDefault(); // Prevent form submission
+    document.getElementById('day').classList.remove('value-button-active');
+    document.getElementById('week').classList.remove('value-button-active');
+    document.getElementById('month').classList.remove('value-button-active');
+    document.getElementById('year').classList.remove('value-button-active');
+    document.getElementById(type).classList.add('value-button-active');
+}

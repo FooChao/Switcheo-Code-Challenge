@@ -356,6 +356,23 @@
             <option value="ZIL">ZIL</option>
           </select> 
         </div>
+        <div class="row-container">
+          <h1>
+            Expiry: 
+          </h1>
+          <button id = "day" class="value-button" onclick="changeExpiry('day', event)">
+            day
+          </button>
+          <button id = "week" class="value-button" onclick="changeExpiry('week', event)">
+            week
+          </button>
+          <button id = "month" class="value-button" onclick="changeExpiry('month', event)">
+            month
+          </button>
+          <button id = "year" class="value-button" onclick="changeExpiry('year', event)">
+            year
+          </button>
+        </div>
         <div>
           <h2 id ="limitOwnedrecieve">Currently owned:</h2>
         </div>
