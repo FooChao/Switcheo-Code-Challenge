@@ -10,15 +10,42 @@
 <body>
 
   <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+  
+  <form onsubmit="return !1" class = "styled-form">
+    <div id = "form_nav">
+      <button>
+        Swap
+      </button>
+      <button>
+        Limit
+      </button>
+      <button>
+        Send
+      </button>
+      <button>
+        buy
+      </button>
+    </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
-
-    <button>CONFIRM SWAP</button>
+    <div id="swap">
+      <div class = "partition">
+        <div>
+          <label for="input-amount">Amount to send:</label>
+        </div>
+        <div>
+          <input id="input-amount" />
+        </div>
+      </div>
+      <div class = "partition">
+        <div>
+          <label for="output-amount">Amount to receive:</label>      
+        </div>
+        <div>
+          <input id="output-amount" />
+        </div>
+        <button class = "submit">CONFIRM SWAP</button>
+      </div>
+    </div>    
   </form>
   <script src="script.js"></script>
 </body>
