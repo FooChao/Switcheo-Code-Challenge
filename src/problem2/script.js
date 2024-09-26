@@ -105,9 +105,20 @@ function updateCurrentOwnedAtBuy() {
     + currentOwned.find(item => item.currency === 'USD').amount + ")";
 }
 
+function updateCurrentOwnedAtLimit() {
+    const inputCurrency = document.getElementById('currency4').value;
+    const outputCurrency = document.getElementById('currency5').value;
+    document.getElementById("limitOwnedSend").textContent = "Currently Owned:" 
+        + currentOwned.find(item => item.currency === inputCurrency).amount ;
+    document.getElementById("limitOwnedrecieve").textContent = "Currently Owned:"
+        + currentOwned.find(item => item.currency === outputCurrency).amount;
+}
+
 updateCurrentOwnedAtSwap();
 updateCurrentOwnedAtSend();
 updateCurrentOwnedAtBuy();
+updateCurrentOwnedAtLimit()
+updateCurrencyExchange();
 
 
 
@@ -248,6 +259,7 @@ function tryToTrade() {
         updateCurrentOwnedAtSwap();
         updateCurrentOwnedAtSend();
         updateCurrentOwnedAtBuy();
+        updateCurrentOwnedAtLimit();
         updateStorage();
         document.getElementById('input-amount').value = 0;
         document.getElementById('output-amount').value = 0;
@@ -287,6 +299,7 @@ function confirmAndSend (event) {
         updateCurrentOwnedAtSwap();
         updateCurrentOwnedAtSend();
         updateCurrentOwnedAtBuy();
+        updateCurrentOwnedAtLimit();
         updateStorage();
         document.getElementById('input-amount-to-send').value = 0;
 
@@ -373,7 +386,8 @@ function tryToBuy() {
         currentOwned.find(item => item.currency === outputCurrency).amount += output;
         updateCurrentOwnedAtSwap();
         updateCurrentOwnedAtSend();
-        updateCurrentOwnedAtBuy()
+        updateCurrentOwnedAtBuy();
+        updateCurrentOwnedAtLimit();
         updateStorage();
         document.getElementById('usd-to-spend').value = 0;
         document.getElementById('amount-recieved').textContent = "Amount recieved: " + 0;
@@ -552,4 +566,19 @@ function updateRateButton() {
     }  
 
 
+}
+
+function handleChangeInSellCurrency() {
+    updateMarketCurrencyExchange();
+    updateBuyAmount();
+    document.getElementById("exchange-currency").textContent = "When 1 "
+        + document.getElementById("currency4").value + " is worth";
+}
+
+
+function handleChangeInBuyCurrency() {
+    updateMarketCurrencyExchange();
+    updateSellAmount();
+    document.getElementById("currency6").textContent = document.getElementById("currency5").value;
+    
 }

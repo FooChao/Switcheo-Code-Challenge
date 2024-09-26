@@ -245,7 +245,7 @@
     <div id="limit" class = "hidden">
       <div class = "partition">
         <div>
-          <label for="exchange-amount" class = "exchange-currency">When 1 USD is worth</label>
+          <label for="exchange-amount" id = "exchange-currency">When 1 USD is worth</label>
         </div>
         <div class = "row-container">          
           <div>
@@ -275,7 +275,7 @@
         </div>
         <div>
           <input id="sell-amount" onkeyup="updateBuyAmount()" value="0"/>
-          <select name="currency4" id="currency4" onchange="updateBuyAmount()" value="USD">
+          <select name="currency4" id="currency4" onchange="handleChangeInSellCurrency()">
             <option value="USD">USD</option>
             <option value="BLUR">BLUR</option>
             <option value="bNEO">bNEO</option>
@@ -321,7 +321,7 @@
         </div>
         <div>
           <input id="buy-amount" onkeyup="updateSellAmount()" value = "0"/>
-          <select name="currency5" id="currency5" onchange="updateSellAmount()">
+          <select name="currency5" id="currency5" onchange="handleChangeInBuyCurrency()">
             <option value="BLUR">BLUR</option>
             <option value="bNEO">bNEO</option>
             <option value="BUSD">BUSD</option>
