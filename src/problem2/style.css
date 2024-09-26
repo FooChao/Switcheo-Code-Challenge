@@ -30,6 +30,7 @@ body {
   background: linear-gradient(to bottom right,#00ffbf ,#00ddff );
   align-items: center;
   justify-content: center;
+
 }
 
 
@@ -93,4 +94,9 @@ body {
 
 .hidden {
   display: none;
+}
+
+.styled-form .active {
+  background-color: #00b451;
+  border-radius: 50px;
 }

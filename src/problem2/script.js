@@ -80,7 +80,6 @@ if (localStorage.getItem('currentOwned') === null) {
     currentOwned = JSON.parse(localStorage.getItem('currentOwned'));
 }   
 
-console.log(currentOwned);
 
 function updateStorage () {
     localStorage.setItem('currentOwned', JSON.stringify(currentOwned));
@@ -95,11 +94,40 @@ function updateCurrentOwned() {
         + currentOwned.find(item => item.currency === outputCurrency).amount;
 }
 
-console.log("here");
+
+
+function change(number, event) {
+
+    if (event) event.preventDefault(); // Prevent form submission
+
+    // Remove 'active' class from all buttons first
+    document.getElementById("swapButton").classList.remove("active");
+    document.getElementById("sendButton").classList.remove("active");
+    document.getElementById("buyButton").classList.remove("active");
+    document.getElementById("swap").classList.add("hidden");
+    document.getElementById("send").classList.add("hidden");
+    document.getElementById("buy").classList.add("hidden");
+    switch (number) {
+        case 1 : 
+            document.getElementById("swapButton").classList.add("active");
+            document.getElementById("swap").classList.remove("hidden");
+            break;
+        case 2 :
+            document.getElementById("sendButton").classList.add("active");
+            document.getElementById("send").classList.remove("hidden");
+            break;
+        case 3 : 
+            document.getElementById("buyButton").classList.add("active");
+            document.getElementById("buy").classList.remove("hidden");
+            break;
+        default:
+            //fall through
+    }
+}
+
 updateCurrentOwned();
 
 function updateOutput() {
-    console.log('detected');
     const input = document.getElementById('input-amount').value;
     const output = document.getElementById('output-amount');
     const currencyinput = document.getElementById('currency').value;
@@ -108,7 +136,6 @@ function updateOutput() {
 }
 
 function updateInput() {
-    console.log('detected');
     const input = document.getElementById('input-amount');
     const output = document.getElementById('output-amount').value;
     const currencyinput = document.getElementById('currency').value;
@@ -137,7 +164,10 @@ function conversion(input, inputCurrency, output, outputCurrency) {
     return convertedAmount;
 }
 
-function confirmAndTrade() {
+function confirmAndTrade(event) {
+
+    if (event) event.preventDefault(); // Prevent form submission
+    
     const userConfirmed = confirm("Are you sure you want to proceed with the swap?");
     if (userConfirmed) {
         tryToTrade();
@@ -145,7 +175,6 @@ function confirmAndTrade() {
         alert("You have cancelled the swap!")
     }
 }
-
 
 function tryToTrade() {
     const input = parseFloat(document.getElementById('input-amount').value);
@@ -166,9 +195,9 @@ function tryToTrade() {
         currentOwned.find(item => item.currency === outputCurrency).amount += output;
         updateCurrentOwned();
         updateStorage();
+        document.getElementById('input-amount').value = 0;
+        document.getElementById('output-amount').value = 0;
     }
-
-
 }
 
 
