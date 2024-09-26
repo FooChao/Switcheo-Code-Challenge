@@ -579,8 +579,7 @@ function handleChangeInSellCurrency() {
 function handleChangeInBuyCurrency() {
     updateMarketCurrencyExchange();
     updateSellAmount();
-    document.getElementById("currency6").textContent = document.getElementById("currency5").value;
-    
+    document.getElementById("currency6").textContent = document.getElementById("currency5").value;   
 }
 
 function changeExpiry(type, event) {
