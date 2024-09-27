@@ -18,7 +18,7 @@ interface WalletBalance {
   const WalletPage: React.FC<Props> = (props: Props) => {
     const { children, ...rest } = props;
     const balances = useWalletBalances();
-    const [prices, setPrices] = useState({});
+      const [prices, setPrices] = useState({});
   
     useEffect(() => {
       const datasource = new Datasource("https://interview.switcheo.com/prices.json");
