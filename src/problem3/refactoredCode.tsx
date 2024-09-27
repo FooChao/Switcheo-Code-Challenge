@@ -17,7 +17,19 @@ interface WalletBalance {
   }
   
   class Datasource {
-    // TODO: Implement datasource class
+    url: string;
+  
+    constructor(url: string) {
+      this.url = url;
+    }
+  
+    async getPrices(): Promise<any> {
+      const response = await fetch(this.url);
+      if (!response.ok) {
+        throw new Error("Failed to fetch prices");
+      }
+      return await response.json();
+    }
   }
   
   //Error 3 fix 
