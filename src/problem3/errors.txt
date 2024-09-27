@@ -13,8 +13,8 @@ Solution: Remove the Props interface and replace it with BoxProps
 Error 4 : line 21 : Prices is likely to be an array and should not be initiialised as an empty object
 Solution: Initialised it as an empty array instead
 
-Error 5 : line 25 : prices as name of fetched prices may be confusing as it is the same as the useState name
-Solution: Rename it as fetchedPrices
+Error 5 : line 25 : prices as name of fetched prices may be confusing as it is the same as the useState name and do not have a type
+Solution: Rename it as fetchedPrices but type not fixed due to lack of information
 
 Error 6 : line 28 : 'console.err' is wrong
 Solution : Change it to console.error
@@ -25,28 +25,31 @@ Solution : Change it to type String or even an enum (but not enough info is give
 Error 8 : line 52 : Typo in lhspriority
 Solution : Change it to balance priortiy
 
-Error 9 : line 51-58 : Filter will never return true based on getpriortiy impelemtation (likely a tyo)
+Error 9 : line 51-58 : Filter condition is weird and it more intutive to have >0
 Solution : Change the condition to balancepriority > 0 (have to make this assumption due to lack of information)
 
-Error 10: line 58 - 66 : Sort's boolean won't return any value when lhs priority = rhs priortiy
+Error 10 : blockchain not in WalletPage field
+Solution : Add it in
+
+Error 11 line 58 - 66 : Sort's boolean won't return any value when lhs priority = rhs priortiy
 Solution : Add a return 0 when they are same
 
-Error 11 : line 67 : Prices used in useMemo when it is not used in calculation resulting in unnecessary re-computation
+Error 12 : line 67 : Prices used in useMemo when it is not used in calculation resulting in unnecessary re-computation
 Solution : Remove prices
 
-Error 12: line 69 : Formatted balance is declared but never read
+Error 13: line 69 : Formatted balance is declared but never read
 Solution : Will leave it as it is due to potential usage in some hidden code
 
-Error 13 : line 69 : Type not declared for formatted balance
+Error 14 : line 69 : Type not declared for formatted balance
 Solution : Add type declaration of Formatted Wallet Balance
 
-Error 14 : line 72 : Likely to have a logic error as it does not makes sense that FormattedWalletBalance's formatted is just trauncated balance
+Error 15 : line 72 : Likely to have a logic error as it does not makes sense that FormattedWalletBalance's formatted is just trauncated balance
 Solution : Will leave it as it is for now due to lack of details of usage
 
-Error 15 : line 80 : classes.row not declared (at least not in the portion I see)
+Error 16 : line 80 : classes.row not declared (at least not in the portion I see)
 Solution : Will leave it as it is due to lack of details of what it is supposed to be (or it may be declared in hidden portion)
 
-Error 16 : Formatting error throughout (mainly due to line alignment)
+Error 17 : Formatting error throughout (mainly due to line alignment)
 Solution : Will fix it
 
 
