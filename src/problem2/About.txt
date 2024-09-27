@@ -1,0 +1,14 @@
+I will use local storage to stimulate accounts saved
+
+Default starting amount : USD 10000 
+
+If depleted it, you have to clear the browser history for index.html to reset to 10000 USD
+
+Limit won't affects any curent amount
+
+Disclaimer : a lot of the code can be made better but I have 5 upcoming midterms next 2 weeks so I do not have sufficient time to clean up the codes but the functionality is there
+- e.g. all the various conversion function has similar logic and some of these logic could be extracted
+- e.g. methods could be packaged 
+- e.g. naming of index.html id could be more intuitive especially currency1-7
+
+
